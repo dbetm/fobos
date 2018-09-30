@@ -54,15 +54,17 @@ form {
     height: 40px;
 }
 
-#boton {
+.boton {
     margin: 0 auto;
 }
 
-#btn-sign-in {
+#btn-sign-in, #btn-sign-up {
     border: none;
     cursor: pointer;
     color: white;
     background-color: #3c8dbc;
-    padding: 9px 20px;
+    padding: 9px 15px;
     font-size: 1.2em;
+    width: 100%;
+    margin-top: 3px;
 }

@@ -2,20 +2,34 @@
 <html lang="es" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>Iniciar sesión</title>
+        <title>Iniciar</title>
         <link rel="stylesheet" href="css/login.css">
-        <script src="app/login.js" charset="utf-8"></script>
         <script src="libraries/jquery-3.3.1.js"></script>
+        <!-- Firebase -->
+        <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
+        <script src="app/firestore.js" charset="utf-8"></script>
+        <script src="app/login.js" charset="utf-8"></script>
+        <style media="screen">
+            body {
+                /* Gradiente radial */
+                background: -webkit-radial-gradient(center, circle, #d61616 0%, #2b0c06 150%);
+                background: -moz-radial-gradient(center, circle, #d61616 0%, #2b0c06 150%);
+                background: radial-gradient(center, circle, #d61616 0%, #2b0c06 150%);
+            }
+        </style>
     </head>
     <body>
         <div class="" id="main-container">
-            <h1>Iniciar sesión</h1>
-            <form id="acceso" action="" class="" method="post">
-                <input type="email"  id="email" name="correo" class="campo" placeholder="Email" autofocus maxlength="65" required>
-                <input type="password" name="contraseña" id="password" class="campo" placeholder="Password" maxlength="85" required>
+            <h1>Iniciar</h1
+            <form id="access" action="return false;" class="">
+                <input type="email"  id="email" name="correo" class="campo" placeholder="Correo electrónico" autofocus maxlength="65" required>
+                <input type="password" name="contraseña" id="password" class="campo" placeholder="Contraseña" maxlength="85" required>
                 <div class="" id="control">
-                    <div id="boton">
-                        <input type="submit" id="btn-sign-in" name="btn-sign-in" value="Iniciar sesión">
+                    <div class="boton">
+                        <input type="submit" id="btn-sign-in" name="btn-sign-in" value="Iniciar sesión" onclick="acceso.signIn();">
+                    </div>
+                    <div class="boton">
+                        <input type="submit" id="btn-sign-up" name="btn-sign-up" value="Registrarse" onclick="acceso.signOut();">
                     </div>
                 </div>
             </form>
