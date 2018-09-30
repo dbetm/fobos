@@ -6,23 +6,18 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="../libraries/jquery-3.3.1.js"></script>
 <link rel="stylesheet" href="../css/dashboard.css">
+<link rel="stylesheet" href="../css/formas.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
-<script src="../libraries/jquery-3.3.1.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.5.2/firebase.js"></script>
 <script src="../app/firestore.js" charset="utf-8"></script>
+<script src="../app/sugerencias.js" charset="utf-8"></script>
 
 <style>
     html, body, h1, h2, h3, h4, h5 {
         font-family: "Raleway", sans-serif
-    }
-    body {
-        /* Gradiente radial */
-        background: -webkit-radial-gradient(center, circle, #d61616 0%, #2b0c06 150%);
-        background: -moz-radial-gradient(center, circle, #d61616 0%, #2b0c06 150%);
-        background: radial-gradient(center, circle, #d61616 0%, #2b0c06 150%);
     }
 </style>
 <body class="w3-light-grey">
@@ -47,9 +42,9 @@
   </div>
   <div class="w3-bar-block">
     <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>  Inicio</a>
+    <a href="dashboard.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-home fa-fw"></i>  Inicio</a>
     <a href="quejas.html" class="w3-bar-item w3-button w3-padding"><i class="fa fa-times-circle fa-fw"></i>  Quejas</a>
-    <a href="sugerencias" class="w3-bar-item w3-blue w3-button w3-padding"><i class="fa fa-envelope fa-fw"></i>  Sugerencias</a>
+    <a href="sugerencias.html" class="w3-bar-item w3-green-theme w3-button w3-padding"><i class="fa fa-envelope fa-fw"></i>  Sugerencias</a>
   </div>
 </nav>
 
@@ -61,28 +56,18 @@
 
   <!-- Header -->
   <header class="w3-container" style="padding-top:22px">
-    <h5><b> Sugerencias</b></h5>
+    <h2><b> Sugerencias</b></h2>
   </header>
-
+  <form>
+      <input id="busqueda" type="text" name="search" placeholder="Search...">
+  </form>
   <div class="w3-panel">
-    <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action active">
-          Cras justo odio
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
-        <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
-        <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
-        <a href="#" class="list-group-item list-group-item-action disabled">Vestibulum at eros</a>
+    <div class="list-group" id="listaGrupo">
+
     </div>
   </div>
 
   <hr>
-  <br>
-  <!-- Footer -->
-  <footer class="w3-container w3-padding-16 w3-light-grey">
-    <p>Construído por equipo Fourier</p>
-  </footer>
-
   <!-- End page content -->
 </div>
 

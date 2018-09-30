@@ -1,9 +1,9 @@
 $(document).ready(function() {
-    quejas.iniciar();
-    quejas.lanzarAgenteDeQuejas();
+    sugerencias.iniciar();
+    sugerencias.lanzarAgenteDeSugerencias();
 });
 
-var quejas = {
+var sugerencias = {
     iniciar: function() {
         // Initializa firestore app
         firebase.initializeApp(config);
@@ -16,20 +16,6 @@ var quejas = {
         auth.currentUser = window.user;
         //$("#usuario").text(window.user.email);
     },
-
-    // leer: function() {
-    //     db.collection("emisiones").where("Tipo", "==", "Queja")
-    //         .get()
-    //         .then(function(querySnapshot) {
-    //             querySnapshot.forEach(function(doc) {
-    //                 quejas.render(doc);
-    //             });
-    //             quejas.lanzarAgenteDeQuejas();
-    //         })
-    //         .catch(function(error) {
-    //             console.log("Error getting documents: ", error);
-    //         });
-    // },
 
     mostrar: function(id) {
 
@@ -51,12 +37,12 @@ var quejas = {
         $(".list-group").prepend(li);
     },
 
-    lanzarAgenteDeQuejas: function() {
-        db.collection("emisiones").where("Tipo", "==", "Queja")
+    lanzarAgenteDeSugerencias: function() {
+        db.collection("emisiones").where("Tipo", "==", "Sugerencia")
         .onSnapshot(function(snapshot) {
             snapshot.docChanges().forEach(function(change) {
                 if (change.type === "added") {
-                    quejas.render(change.doc);
+                    sugerencias.render(change.doc);
                 }
                 if (change.type === "removed") {
                     var item = document.getElementById(change.doc.id);

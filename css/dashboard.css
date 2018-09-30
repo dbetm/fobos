@@ -5,3 +5,9 @@
 .sign-out {
     text-decoration: underline;
 }
+
+.w3-green-theme {
+    background-color: #1ebea5;
+    color: #fff;
+    font-weight: bold;
+}
