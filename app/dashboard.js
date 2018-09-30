@@ -5,10 +5,7 @@ $(document).ready(function() {
     // Get the DIV with overlay effect
     var overlayBg = document.getElementById("myOverlay");
 
-    tablero.getNumeroQuejas();
-    tablero.getNumSugerencias();
-    tablero.getNumPorDia();
-    tablero.getNumPorSemana();
+    tablero.getFlujo();
 });
 
 function w3_open() {
@@ -31,42 +28,48 @@ var tablero = {
         const settings = {timestampsInSnapshots: true};
         db.settings(settings);
         var user = firebase.auth().currentUser;
-        console.log(user.email);
-
-        // var name, email, photoUrl, uid, emailVerified;
-
-        // if (user != null) {
-        //   name = user.displayName;
-        //   email = user.email;
-        //   photoUrl = user.photoURL;
-        //   emailVerified = user.emailVerified;
-        //   uid = user.uid;
-        // }
     },
 
-    getNumeroQuejas: function() {
-        getStat("quejas", "numQuejas");
-    },
-
-    getNumSugerencias: function() {
-        getStat("sugerencias", "numSugerencias");
-    },
-
-    getNumPorDia: function() {
-        db.collection('emisiones').where("created_at", "==", new Date()).get().then(snap => {
-            $("#numPorDia").text(snap.size);
-        });
-    },
-
-    getNumPorSemana: function() {
-        // Al día de hoy
-        var d = new Date();
-        // Se le restan 7 días
-        var d1 = d.setDate(d.getDate()-7);
-
-        db.collection('emisiones').where("created_at", "<=", d).where("created_at", ">=", d1).get().then(snap => {
-            $("#numPorDia").text(snap.size);
-        });
+    getFlujo: function() {
+        var contDia = 0;
+        var contSemana = 0;
+        var contQuejas = 0;
+        var contSugerencias = 0;
+        $("#numPorSemana").text("0");
+        // db.collection('emisiones').where("Fecha", "==", new Date()).get().then(snap => {
+        //     $("#numPorDia").text(snap.size);
+        // });
+        db.collection("emisiones").get()
+            .then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                    var date = doc.data().Fecha.toDate();
+                    var hoy = new Date();
+                    var hoyAux = hoy;
+                    hoy = hoy.getDay() + "," + hoy.getDate() + "," + hoy.getFullYear();
+                    var aux = date.getDay() + "," + date.getDate() + "," + date.getFullYear();
+                    if(aux == hoy) {
+                        contDia++;
+                        // No son buenas prácticas
+                        $("#numPorDia").text(contDia);
+                    }
+                    var haceUnaSemana = new Date(hoyAux - 7);
+                    if(date.getTime() >= haceUnaSemana.getTime()) {
+                        contSemana++;
+                        $("#numPorSemana").text(contSemana);
+                    }
+                    if(doc.data().Tipo == "Queja") {
+                        contQuejas++;
+                        $("#numQuejas").text(contQuejas);
+                    }
+                    else {
+                        contSugerencias++;
+                        $("#numSugerencias").text(contSugerencias);
+                    }
+                });
+            })
+            .catch(function(error) {
+                console.log("Error getting documents: ", error);
+            });
     },
 };
 
@@ -84,21 +87,4 @@ var sesion = {
 function w3_close() {
     mySidebar.style.display = "none";
     overlayBg.style.display = "none";
-}
-
-function getStat(documento, id) {
-    var docRef = db.collection("stats").doc(documento);
-
-    docRef.get().then(function(doc) {
-        if (doc.exists) {
-            console.log("Document data:", doc.data());
-            $("#"+id).text(doc.data().contador);
-        }
-        else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
-        }
-    }).catch(function(error) {
-        console.log("Error getting document:", error);
-    });
 }
